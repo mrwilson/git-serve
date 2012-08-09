@@ -14,6 +14,7 @@
 			<ul>
 			{% for commit in commits %}
 				<li>{{ commit.message }} -- {{ commit.author }} -- {{ commit.date }}</li>
+				<li>{{ commit.id }} 
 				<ul>
 				{% for file, changes in commit.changes.items() %}
 					<li> {{ file }} -- {{ changes }} </li>

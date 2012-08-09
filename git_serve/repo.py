@@ -29,6 +29,7 @@ class GitServeRepo(object):
 			retval["date"] = datetime.datetime.fromtimestamp(commit.committed_date)
 			retval["message"] = commit.summary
 			retval["changes"] = commit.stats.files
+			retval["id"] = commit.name_rev.split(" ")[0]
 			data.append(retval)
 		print data
 		return data
