@@ -1,6 +1,6 @@
 from git import Repo
 from git.exc import InvalidGitRepositoryError
-import os, sys
+import os, sys, datetime
 
 class GitServeRepo(object):
 	
@@ -14,18 +14,31 @@ class GitServeRepo(object):
 			print "Not a git repo, exiting"
 			sys.exit(-1)
 
+		self.name = self.repo.index.path	
+			
 	def get_frontpage_data(self):
 		data = {}
 		data['files'] = self.index_to_tree(self.repo.index.entries)
-		data['name'] =  self.repo.index.path
 		return data
 
+	def get_commits(self):
+		data = []
+		for commit in self.repo.iter_commits():
+			retval = {}
+			retval["author"] = "%s <%s>" % (commit.author.name, commit.author.email)
+			retval["date"] = datetime.datetime.fromtimestamp(commit.committed_date)
+			retval["message"] = commit.summary
+			retval["changes"] = commit.stats.files
+			data.append(retval)
+		print data
+		return data
+		
 	def index_to_tree(self,filelist):
 		file_tree = {}
-		for k in filelist:
+		for file in filelist:
 		
 			#split into directory levels
-			parts = k[0].split('/')
+			parts = file[0].split('/')
 			
 			current_level = file_tree
 			

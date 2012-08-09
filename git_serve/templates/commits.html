@@ -12,11 +12,13 @@
 	
 		<div id="files">
 			<ul>
-			{% for dir, child in data.files.items() recursive %}
-				<li>{{ dir }}</li>
-				{% if child %}
-					<ul>{{ loop(child.items()) }}</ul>
-				{% endif %}
+			{% for commit in commits %}
+				<li>{{ commit.message }} -- {{ commit.author }} -- {{ commit.date }}</li>
+				<ul>
+				{% for file, changes in commit.changes.items() %}
+					<li> {{ file }} -- {{ changes }} </li>
+				{% endfor %}
+				</ul>
 			{% endfor %}
 			<ul> 
 		</div>
