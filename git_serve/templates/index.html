@@ -12,10 +12,21 @@
 	
 		<div id="files">
 			<ul>
-			{% for file in data.files %}
+			
+			{% for dir, child in data.files.items() recursive %}
+			<li>{{ dir }}</li>
+			{% if child %}
+				<ul>
+					{{ loop(child.items()) }}
+				</ul>
+							
+			{% endif %}</li>
+		{% endfor %}
+			
+			<!--{% for file in data.files %}
 				<li>{{ file }}</li>
-			{% endfor %}
-			<ul>
+			{% endfor %}  -->
+			<ul> 
 		</div>
 	
 	
