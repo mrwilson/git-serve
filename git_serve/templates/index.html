@@ -4,5 +4,23 @@
 		<title>Git Serve</title>
 	</head>
 	<body>
+	
+	<div id="repo-info">
+		<div id="name">
+			<p>{{ data.name }}</p>
+		</div>	
+	
+		<div id="files">
+			<ul>
+			{% for file in data.files %}
+				<li>{{ file }}</li>
+			{% endfor %}
+			<ul>
+		</div>
+	
+	
+	</div>
+	
+	
 	</body>
 </html>
