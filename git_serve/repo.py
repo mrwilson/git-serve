@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from git import Repo
 from git.exc import InvalidGitRepositoryError
 import os, sys, datetime
@@ -28,12 +29,15 @@ class GitServeRepo(object):
 			retval["author"] = "%s <%s>" % (commit.author.name, commit.author.email)
 			retval["date"] = datetime.datetime.fromtimestamp(commit.committed_date)
 			retval["message"] = commit.summary
-			retval["changes"] = commit.stats.files
-			retval["id"] = commit.name_rev.split(" ")[0]
+			retval["id"] = commit.hexsha
 			data.append(retval)
 		print data
 		return data
-		
+	
+	
+	def get_data_from_commit(self,commit_id):
+			return False
+	
 	def index_to_tree(self,filelist):
 		file_tree = {}
 		for file in filelist:
