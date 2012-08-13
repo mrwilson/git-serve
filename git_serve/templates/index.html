@@ -4,26 +4,27 @@
 		<title>Git Serve</title>
 	</head>
 	<body>
-	
-	<div id="repo-info">
-		<div id="name">
-			<p>{{ name }}</p>
-		</div>	
-	
-		<div id="files">
-			<ul>
-			{% for dir, child in data.files.items() recursive %}
-				<li>{{ dir }}</li>
-				{% if child %}
-					<ul>{{ loop(child.items()) }}</ul>
-				{% endif %}
-			{% endfor %}
-			<ul> 
+		<div id="repo-info">
+			<div id="name">
+				<p>{{ name }}</p>
+			</div>
+
+			{% if error %}
+				<div id="error">
+					<font color="red">{{ error }}</font>
+				</div>
+			{% endif %}
+			
+			<div id="files">
+				<ul>
+				{% for dir, child in data.files.items() recursive %}
+					<li>{{ dir }}</li>
+					{% if child %}
+						<ul>{{ loop(child.items()) }}</ul>
+					{% endif %}
+				{% endfor %}
+				<ul> 
+			</div>
 		</div>
-	
-	
-	</div>
-	
-	
 	</body>
 </html>

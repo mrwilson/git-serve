@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from git import Repo
-from git.exc import InvalidGitRepositoryError
+from git.exc import InvalidGitRepositoryError, BadObject
 import os, sys, datetime
 
 class GitServeRepo(object):
@@ -35,8 +35,16 @@ class GitServeRepo(object):
 		return data
 	
 	
-	def get_data_from_commit(self,commit_id):
+	def commit_exists(self,commit_id):
+		try:
+			self.repo.commit(commit_id)
+		except BadObject:
 			return False
+
+		return True
+	
+	def get_data_from_commit(self,commit_id):
+		return self.repo.commit(commit_id).stats.files
 	
 	def index_to_tree(self,filelist):
 		file_tree = {}

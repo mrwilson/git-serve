@@ -13,7 +13,7 @@
 		<div id="files">
 			<ul>
 			{% for commit in commits %}
-				<li>{{ commit.id }} </li>
+				<li><a href="/commit/{{commit.id}}">{{ commit.id }}</a> </li>
 				<ul>
 					<li>Commit message: {{ commit.message }}</li> 
 					<li>Author: {{ commit.author }}</li> 
