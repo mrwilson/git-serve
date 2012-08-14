@@ -10,11 +10,12 @@ class GitServeRepo(object):
 	
 	def setup(self, path):
 		try:
+			self.repo = Repo(os.getcwd())
 			self.name = self.repo.index.path
 		except InvalidGitRepositoryError:
 			print "Not a git repo, exiting"
 			sys.exit(-1)
-			
+						
 	def get_frontpage_data(self):
 		data = {}
 		data['files'] = self.index_to_tree(self.repo.index.entries)

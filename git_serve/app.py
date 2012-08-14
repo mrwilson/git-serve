@@ -28,4 +28,4 @@ def error(errormsg):
 	return render_template("index.html",error=errormsg,data=git_repo.get_frontpage_data(),name=name)
 
 def run_app():
-	app.run(debug=True)
+	app.run()
