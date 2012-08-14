@@ -1,30 +1,17 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html lang="en">
-	<head>
-		<title>Git Serve</title>
-	</head>
-	<body>
-		<div id="repo-info">
-			<div id="name">
-				<p>{{ name }}</p>
-			</div>
-
-			{% if error %}
-				<div id="error">
-					<font color="red">{{ error }}</font>
-				</div>
-			{% endif %}
-			
-			<div id="files">
-				<ul>
-				{% for dir, child in data.files.items() recursive %}
-					<li>{{ dir }}</li>
-					{% if child %}
-						<ul>{{ loop(child.items()) }}</ul>
-					{% endif %}
-				{% endfor %}
-				<ul> 
-			</div>
+{% extends "base.html" %}
+{% block content %}
+	{% if error %}
+		<div id="error">
+			<font color="red">{{ error }}</font>
 		</div>
-	</body>
-</html>
+	{% endif %}
+			
+	<div id="commit-changes"><ul>
+		{% for dir, child in data.files.items() recursive %}
+			<li>{{ dir }}</li>
+			{% if child %}
+				<ul>{{ loop(child.items()) }}</ul>
+			{% endif %}
+		{% endfor %}
+	<ul></div>
+{% endblock %}

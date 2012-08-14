@@ -1,31 +1,14 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html lang="en">
-	<head>
-		<title>Git Serve</title>
-	</head>
-	<body>
-	
-	<div id="repo-info">
-		<div id="name">
-			<p>{{ name }}</p>
-		</div>	
-	
-		<div id="files">
+{% extends "base.html" %}
+{% block content %}
+	<div id="commits"><ul>
+		{% for commit in commits %}
+			<li><a href="/commit/{{commit.id}}">{{ commit.id }}</a> </li>
 			<ul>
-			{% for commit in commits %}
-				<li><a href="/commit/{{commit.id}}">{{ commit.id }}</a> </li>
-				<ul>
-					<li>Commit message: {{ commit.message }}</li> 
-					<li>Author: {{ commit.author }}</li> 
-					<li>Date: {{ commit.date }}</li>
-				</ul>
-			{% endfor %}
-			<ul> 
-		</div>
-	
-	
-	</div>
-	
-	
-	</body>
-</html>
+				<li>Commit message: {{ commit.message }}</li> 
+				<li>Author: {{ commit.author }}</li> 
+				<li>Date: {{ commit.date }}</li>
+			</ul>
+		{% endfor %}
+	<ul></div>
+{% endblock %}

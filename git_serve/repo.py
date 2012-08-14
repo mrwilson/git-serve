@@ -10,12 +10,10 @@ class GitServeRepo(object):
 	
 	def setup(self, path):
 		try:
-			self.repo = Repo(path)
+			self.name = self.repo.index.path
 		except InvalidGitRepositoryError:
 			print "Not a git repo, exiting"
 			sys.exit(-1)
-
-		self.name = self.repo.index.path	
 			
 	def get_frontpage_data(self):
 		data = {}
@@ -31,16 +29,13 @@ class GitServeRepo(object):
 			retval["message"] = commit.summary
 			retval["id"] = commit.hexsha
 			data.append(retval)
-		print data
 		return data
-	
-	
+		
 	def commit_exists(self,commit_id):
 		try:
 			self.repo.commit(commit_id)
 		except BadObject:
 			return False
-
 		return True
 	
 	def get_data_from_commit(self,commit_id):
